@@ -1,0 +1,79 @@
+server:
+  port: 7002
+
+server.error.include-message: always
+
+spring.application.name: user
+
+app.eureka-server: localhost
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${app.eureka-server}:8761/eureka/
+    # ?? ???? ?? ?? ??
+    initial-instance-info-replication-interval-seconds: 5
+    # ????? ??? ???? ??
+    registry-fetch-interval-seconds: 5
+  instance:
+    # lease ?? ??(Eureka Client? ???? ????? ??? ??)
+    # 5 ? ?? ?? ??? ??? ????? ????
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 5
+
+spring.jpa.hibernate.ddl-auto: update
+
+spring.datasource:
+  url: jdbc:postgresql://localhost/user-db
+  username: user
+  pwd: pwd
+
+spring:
+  datasource:
+    hikari:
+      initialization-fail-timeout: 60000
+  cloud:
+    function:
+      definition: messageProcessor
+
+    stream:
+      default-binder: rabbit
+      default.contentType: application/json
+      bindings:
+        messageProcessor-in-0:
+          destination: review
+          group: reviewsGroup
+
+
+spring.cloud.stream.bindings.messageProcessor-in-0.consumer:
+  maxAttempts: 3
+  backOffInitialInterval: 500
+  backOffMaxInterval: 1000
+  backOffMultiplier: 2.0
+
+spring.cloud.stream.rabbit.bindings.messageProcessor-in-0.consumer:
+  autoBindDlq: true
+  republishToDlq: true
+
+spring.rabbitmq:
+  host: 127.0.0.1
+  port: 5672
+  username: guest
+  password: guest
+
+
+logging:
+  level:
+    root: info
+    com.sebin: debug
+    org.hibernate.sql: debug
+    org.hibernate.type.descriptor.BasicBinder: trace
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
