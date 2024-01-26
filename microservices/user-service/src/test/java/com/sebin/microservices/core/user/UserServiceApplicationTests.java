@@ -1,6 +1,6 @@
 package com.sebin.microservices.core.user;
 
-import com.sebin.api.core.user.User;
+import com.sebin.api.core.user.model.User;
 import com.sebin.api.event.Event;
 import com.sebin.microservices.core.user.persistence.PostgreSqlTestBase;
 import com.sebin.microservices.core.user.persistence.UserRepository;

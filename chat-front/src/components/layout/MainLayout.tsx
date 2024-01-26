@@ -15,11 +15,11 @@ import Drawer from "@/components/drawer/Drawer";
 import {Simulate} from "react-dom/test-utils";
 import toggle = Simulate.toggle;
 import {ChevronLeft, Menu, MenuBook, MenuOpen, Notifications} from "@mui/icons-material";
-import {useAppSelector} from "@/hooks/redux";
-import {getDrawerState} from "@/store/selectors/authSelectors";
 import {useDispatch} from "react-redux";
 import {drawerSlice} from "@/store/slices/drawerSlice";
 import AppBar from "@/components/app-bar/AppBar";
+import {useAppSelector} from "@/store/hooks/hooks";
+import {getDrawerState} from "@/store/selectors/publicSelectors";
 
 const MainLayout: FC<PropsWithChildren> = ({children}) => {
   const dispatch = useDispatch();

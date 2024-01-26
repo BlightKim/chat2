@@ -5,6 +5,7 @@ import FormInput from "@/components/common/form-input";
 import {FormProvider, SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {getSignupSchema, ISignup} from "@/types/signup";
+import {getData, postData} from "@/api";
 
 
 const SignupForm: FC = () => {
@@ -22,8 +23,9 @@ const SignupForm: FC = () => {
     defaultValues,
   });
 
-  const onSubmitHandler: SubmitHandler<ISignup> = (values: ISignup) => {
-    console.log(values);
+  const onSubmitHandler: SubmitHandler<ISignup> = async (values: ISignup) => {
+    const response = await postData<any>('/user');
+
   }
   return (
       <FormProvider {...formMethods}>

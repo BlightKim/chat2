@@ -1,19 +1,22 @@
 package com.sebin.microservices.core.user.services;
 
-import com.sebin.api.core.user.Signup;
-import com.sebin.api.core.user.User;
+import com.sebin.api.core.user.signup.Signup;
+import com.sebin.api.core.user.model.User;
 import com.sebin.api.core.user.UserService;
 import com.sebin.microservices.core.user.persistence.UserRepository;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 
 /**
- * Please explain the class!!
+ * UserService를 구현
  *
  * @author : sebin
  * @fileName : UserServiceImpl
@@ -34,7 +37,8 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public Mono<User> createUser(Signup body) {
+  public Mono<ResponseEntity<>> createUser(@RequestBody @Valid Signup body) {
+
     return null;
   }
 

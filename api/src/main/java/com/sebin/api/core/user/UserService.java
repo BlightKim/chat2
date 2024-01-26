@@ -1,5 +1,7 @@
 package com.sebin.api.core.user;
 
+import com.sebin.api.core.user.model.User;
+import com.sebin.api.core.user.signup.Signup;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

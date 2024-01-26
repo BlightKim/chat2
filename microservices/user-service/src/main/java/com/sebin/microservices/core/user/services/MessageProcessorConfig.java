@@ -1,6 +1,6 @@
 package com.sebin.microservices.core.user.services;
 
-import com.sebin.api.core.user.User;
+import com.sebin.api.core.user.model.User;
 import com.sebin.api.core.user.UserService;
 import com.sebin.api.event.Event;
 import java.util.function.Consumer;

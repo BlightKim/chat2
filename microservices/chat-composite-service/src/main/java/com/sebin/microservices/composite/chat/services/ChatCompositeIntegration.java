@@ -1,6 +1,6 @@
 package com.sebin.microservices.composite.chat.services;
 
-import com.sebin.api.core.user.User;
+import com.sebin.api.core.user.model.User;
 import com.sebin.api.core.user.UserService;
 import com.sebin.api.event.Event;
 import org.slf4j.Logger;

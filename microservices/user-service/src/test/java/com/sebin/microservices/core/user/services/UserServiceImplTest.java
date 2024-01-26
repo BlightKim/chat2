@@ -2,7 +2,8 @@ package com.sebin.microservices.core.user.services;
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-import com.sebin.api.core.user.User;
+import com.sebin.api.core.user.signup.Signup;
+import com.sebin.api.core.user.model.User;
 import com.sebin.api.event.Event;
 import com.sebin.microservices.core.user.persistence.PostgreSqlTestBase;
 import com.sebin.microservices.core.user.persistence.UserRepository;
@@ -12,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec;
 
 /**
  * Please explain the class!!
@@ -46,7 +47,20 @@ class UserServiceImplTest extends PostgreSqlTestBase {
   }
 
   @Test
-  public void 유저_생성() throws Exception {
+  public void 컨트롤러_테스트() throws Exception {
+    Signup body = new Signup
+        .Builder()
+        .name("")
+        .email("ksebin96@gmail.com")
+        .password("1234")
+        .confirmPassword("1234")
+        .build();
 
+    webTestClient.post()
+        .uri("/user")
+        .accept(MediaType.APPLICATION_JSON)
+        .bodyValue(body)
+        .exchange()
+        .expectStatus().isOk();
   }
 }
