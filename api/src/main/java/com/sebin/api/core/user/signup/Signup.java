@@ -1,5 +1,8 @@
 package com.sebin.api.core.user.signup;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -15,17 +18,30 @@ public class Signup {
   @NotNull
   @NotBlank
   private final String name;
+  @NotNull
+  @NotBlank
   private final String email;
+  @NotNull
+  @NotBlank
   private final String password;
+  @NotNull
+  @NotBlank
   private final String confirmPassword;
 
-  public Signup(String name, String email, String password, String confirmPassword) {
+
+  @JsonCreator
+  public Signup(@JsonProperty("name") String name, @JsonProperty("email") String email,
+      @JsonProperty("password") String password, @JsonProperty("confirmPassword") String confirmPassword) {
     this.name = name;
     this.email = email;
     this.password = password;
     this.confirmPassword = confirmPassword;
   }
 
+  @AssertTrue(message = "패스워드가 일치하지 않습니다.")
+  private boolean isPasswordMatching() {
+    return this.password.equals(this.confirmPassword);
+  }
   private Signup(Builder builder) {
     name = builder.name;
     email = builder.email;

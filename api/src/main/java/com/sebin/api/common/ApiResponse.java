@@ -2,8 +2,10 @@ package com.sebin.api.common;
 
 import java.time.ZonedDateTime;
 import lombok.Builder;
+import lombok.Getter;
 
 /**
+ *
  * API 공통 응답 코드
  *
  * @author : sebin
@@ -38,5 +40,17 @@ public class ApiResponse <T>{
         .message("ERROR!")
         .success(false)
         .build();
+  }
+
+  public boolean isSuccess() {
+    return success;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public T getData() {
+    return data;
   }
 }

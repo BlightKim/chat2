@@ -1,5 +1,6 @@
 package com.sebin.microservices.core.user.persistence;
 
+import com.sebin.api.core.user.signup.Signup;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -62,6 +63,7 @@ public class UserEntity {
 
 
   private UserEntity(Builder builder) {
+    version = builder.version;
     email = builder.email;
     password = builder.password;
     userStatus = builder.userStatus;
@@ -71,8 +73,14 @@ public class UserEntity {
     withdrawalAt = builder.withdrawalAt;
   }
 
+  public static UserEntity from(Signup body) {
+    return new Builder().build();
+  }
+
+
   public static final class Builder {
 
+    private int version;
     private String email;
     private String password;
     private UserStatus userStatus;
@@ -82,6 +90,11 @@ public class UserEntity {
     private LocalDateTime withdrawalAt;
 
     public Builder() {
+    }
+
+    public Builder version(int val) {
+      version = val;
+      return this;
     }
 
     public Builder email(String val) {

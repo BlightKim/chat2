@@ -1,6 +1,9 @@
 package com.sebin.microservices.core.user.persistence;
 
-import org.springframework.data.repository.CrudRepository;
+import jakarta.validation.constraints.NotNull;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -10,10 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
  * @fileName : UserRepository
  * @since : 1/19/24
  */
-public interface UserRepository extends CrudRepository<UserEntity, Long> {
+@Transactional(readOnly = true)
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
 
   @Transactional
-  public UserEntity save(UserEntity userEntity);
+  UserEntity save(@NotNull UserEntity userEntity);
+
+
+  public Optional<UserEntity> findByEmail(String email);
+
 
 }

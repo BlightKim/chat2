@@ -1,10 +1,15 @@
 package com.sebin.api.core.user;
 
+import com.sebin.api.common.ApiResponse;
 import com.sebin.api.core.user.model.User;
 import com.sebin.api.core.user.signup.Signup;
+import com.sebin.api.core.user.signup.SignupDto;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import reactor.core.publisher.Mono;
 
@@ -33,5 +38,5 @@ public interface UserService {
     value = "/user",
     produces = "application/json"
 )
-  public Mono<User> createUser(Signup body);
+  public  Mono<ResponseEntity<ApiResponse<SignupDto>>> createUser(@RequestBody @Valid Signup body);
 }
